@@ -10,7 +10,7 @@ void Test(){
 }
 
 void Main(){
-    Print << "Called 'Main";
+    Print << "Called 'Main'";
 
     Texture texture(Emoji("💘"));
 

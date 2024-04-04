@@ -78,6 +78,8 @@ namespace
 
 void Main()
 {
+	Window::SetTitle(U"OpenSiv3D Script Runner");
+
 	const auto args = System::GetCommandLineArgs();
 	if (args.size() != 2 && args.size() != 3)
 	{

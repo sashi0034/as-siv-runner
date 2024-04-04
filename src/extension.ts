@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import * as path from "node:path";
 import * as child_process from "child_process";
+import {spawn} from "node:child_process";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -21,26 +22,39 @@ export function activate(context: vscode.ExtensionContext) {
     })));
 }
 
+let outputChannel: vscode.OutputChannel;
+
 function runSiv3D(context: vscode.ExtensionContext, entryPoint: string) {
+    outputChannel = vscode.window.createOutputChannel('OpenSiv3D Script Runner');
+    outputChannel.show();
     const editor = vscode.window.activeTextEditor;
-    if (editor) {
-        const document = editor.document;
-        const filePath = document.uri.fsPath;
-        vscode.window.showInformationMessage(`Run '${entryPoint} in '${filePath}'`);
-    } else {
+
+    if (editor === undefined) {
         vscode.window.showErrorMessage('No file selected for execution.');
+        return;
     }
 
-    // 拡張機能のディレクトリ内の実行ファイルを実行
-    console.log(context.extensionPath);
-    // const execPath = path.join(context.extensionPath, 'path/to/your/executable');
-    // child_process.execFile(execPath, (error, stdout, stderr) => {
-    //     if (error) {
-    //         console.error(`実行エラー: ${error}`);
-    //         return;
-    //     }
-    //     console.log(`標準出力: ${stdout}`);
-    // });
+    outputChannel.clear();
+
+    const document = editor.document;
+    const filePath = document.uri.fsPath;
+
+    vscode.window.showInformationMessage(`Run '${entryPoint} in '${filePath}'`);
+
+    const execPath = path.join(context.extensionPath, 'ScriptRunner/ScriptRunner/App/ScriptRunner.exe');
+    const process = spawn(execPath, [filePath, entryPoint]);
+
+    process.stdout.on('data', (data) => {
+        outputChannel.append(data.toString());
+    });
+
+    process.stderr.on('data', (data) => {
+        outputChannel.append(data.toString());
+    });
+
+    process.on('close', (code) => {
+        outputChannel.append(`Process finished with exit code ${code}`);
+    });
 }
 
 

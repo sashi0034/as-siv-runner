@@ -45,7 +45,19 @@
           "group": "navigation"
         }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "as-siv-runner.runMain",
+        "key": "F5",
+        "when": "editorLangId == angelscript"
+      },
+      {
+        "command": "as-siv-runner.runTest",
+        "key": "shift+F5",
+        "when": "editorLangId == angelscript"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
