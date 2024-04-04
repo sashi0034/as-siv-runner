@@ -22,15 +22,25 @@
     ],
     "commands": [
       {
-        "command": "as-siv-runner.helloWorld",
-        "title": "Hello World",
+        "command": "as-siv-runner.runMain",
+        "title": "Run 'Main'",
+        "icon": "$(play)"
+      },
+      {
+        "command": "as-siv-runner.runTest",
+        "title": "Run 'Test'",
         "icon": "$(play)"
       }
     ],
     "menus": {
       "editor/title/run": [
         {
-          "command": "as-siv-runner.helloWorld",
+          "command": "as-siv-runner.runMain",
+          "when": "editorLangId == angelscript",
+          "group": "navigation"
+        },
+        {
+          "command": "as-siv-runner.runTest",
           "when": "editorLangId == angelscript",
           "group": "navigation"
         }
