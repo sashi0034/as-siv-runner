@@ -12,12 +12,30 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "angelscript",
+        "extensions": [
+          ".as"
+        ]
+      }
+    ],
     "commands": [
       {
         "command": "as-siv-runner.helloWorld",
-        "title": "Hello World"
+        "title": "Hello World",
+        "icon": "$(play)"
       }
-    ]
+    ],
+    "menus": {
+      "editor/title/run": [
+        {
+          "command": "as-siv-runner.helloWorld",
+          "when": "editorLangId == angelscript",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
