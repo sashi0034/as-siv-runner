@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import * as path from "node:path";
 import * as child_process from "child_process";
 import {spawn} from "node:child_process";
+import {ChildProcessWithoutNullStreams} from "child_process";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -22,41 +23,50 @@ export function activate(context: vscode.ExtensionContext) {
     })));
 }
 
-let outputChannel: vscode.OutputChannel;
+let outputChannel: vscode.OutputChannel | undefined;
+let process: ChildProcessWithoutNullStreams | null = null;
 
 function runSiv3D(context: vscode.ExtensionContext, entryPoint: string) {
-    outputChannel = vscode.window.createOutputChannel('OpenSiv3D Script Runner');
+    if (outputChannel === undefined) {
+        outputChannel = vscode.window.createOutputChannel('OpenSiv3D Script Runner');
+    }
     outputChannel.show();
-    const editor = vscode.window.activeTextEditor;
 
+    const editor = vscode.window.activeTextEditor;
     if (editor === undefined) {
         vscode.window.showErrorMessage('No file selected for execution.');
         return;
     }
 
-    outputChannel.clear();
-
     const document = editor.document;
-    const filePath = document.uri.fsPath;
+    if (document.uri.scheme !== 'file') {
+        vscode.window.showErrorMessage('The active editor does not contain a file.');
+        return;
+    }
 
+    const filePath = document.uri.fsPath;
     vscode.window.showInformationMessage(`Run '${entryPoint} in '${filePath}'`);
 
+    outputChannel.clear();
+    if (process !== null) {
+        process.kill(); // FIXME: キルされない
+    }
+
     const execPath = path.join(context.extensionPath, 'ScriptRunner/ScriptRunner/App/ScriptRunner.exe');
-    const process = spawn(execPath, [filePath, entryPoint]);
+    process = spawn(execPath, [filePath, entryPoint]);
 
     process.stdout.on('data', (data) => {
-        outputChannel.append(data.toString());
+        outputChannel?.append(data.toString());
     });
 
     process.stderr.on('data', (data) => {
-        outputChannel.append(data.toString());
+        outputChannel?.append(data.toString());
     });
 
     process.on('close', (code) => {
-        outputChannel.append(`Process finished with exit code ${code}`);
+        outputChannel?.appendLine(`Process finished with exit code ${code}`);
     });
 }
-
 
 // This method is called when your extension is deactivated
 export function deactivate() {

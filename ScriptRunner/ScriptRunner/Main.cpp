@@ -24,7 +24,7 @@ namespace
 		if (not entryPoint)
 		{
 			ctx.missingEntryPoint = true;
-			std::cout << "Error: Entry point '" << ctx.entryPoint.narrow() << "' not found" << std::endl;
+			std::cout << "[Error] Entry point '" << ctx.entryPoint.narrow() << "' not found" << std::endl;
 			return;
 		}
 
@@ -32,7 +32,7 @@ namespace
 		entryPoint.tryCall(exception);
 		if (not exception.isEmpty())
 		{
-			std::cout << "Error: " << exception.narrow() << std::endl;
+			std::cout << "[Error] " << exception.narrow() << std::endl;
 		}
 	}
 
@@ -83,14 +83,14 @@ void Main()
 	const auto args = System::GetCommandLineArgs();
 	if (args.size() != 2 && args.size() != 3)
 	{
-		std::cout << "Usage: ScriptRunner <script file path> <entry point>" << std::endl;
+		std::cout << "[Usage] ScriptRunner <script file path> <entry point>" << std::endl;
 		return;
 	}
 
 	const auto scriptPath = args[1];
 	if (not FileSystem::Exists(scriptPath))
 	{
-		std::cout << "Error: Script '" << scriptPath.narrow() << "' not found" << std::endl;
+		std::cout << "[Error] Script '" << scriptPath.narrow() << "' not found" << std::endl;
 	}
 
 	const auto entryPoint = args.size() >= 3 ? args[2] : U"Main";
