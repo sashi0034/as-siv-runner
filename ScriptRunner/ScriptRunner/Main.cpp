@@ -78,8 +78,6 @@ namespace
 
 void Main()
 {
-	Window::SetTitle(U"OpenSiv3D Script Runner");
-
 	const auto args = System::GetCommandLineArgs();
 	if (args.size() != 2 && args.size() != 3)
 	{
@@ -94,6 +92,7 @@ void Main()
 	}
 
 	const auto entryPoint = args.size() >= 3 ? args[2] : U"Main";
+	Window::SetTitle(U"OpenSiv3D Script Runner | {} | {}"_fmt(FileSystem::FileName(scriptPath), entryPoint));
 
 	const auto scriptDirectory = FileSystem::ParentPath(scriptPath);
 	FileSystem::ChangeCurrentDirectory(scriptDirectory);
