@@ -6,12 +6,17 @@
   "engines": {
     "vscode": "^1.87.0"
   },
+  "repository": {
+    "url": "https://github.com/sashi0034/as-siv-runner"
+  },
+  "author": {
+    "name": "sashi0034"
+  },
+  "publisher": "sashi0034",
   "extensionDependencies": [
     "sashi0034.angel-lsp"
   ],
-  "categories": [
-    "angelscript"
-  ],
+  "categories": [],
   "icon": "icons/as-siv-icon.png",
   "activationEvents": [
     "workspaceContains:**/*.as"
