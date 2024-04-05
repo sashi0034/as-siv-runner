@@ -12,3 +12,6 @@ vsc-extension-quickstart.md
 .idea/**
 ScriptRunner/**
 !ScriptRunner/ScriptRunner/App/
+ScriptRunner/ScriptRunner/App/ScriptRunner(debug).exe
+ScriptRunner/ScriptRunner/App/AS_DEBUG
+ScriptRunner/ScriptRunner/App/example/*

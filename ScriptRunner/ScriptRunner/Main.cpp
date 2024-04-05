@@ -109,6 +109,8 @@ void Main()
 
 	s_context->script.setSystemUpdateCallback(scriptSystemUpdate);
 
+	const Font font(FontMethod::SDF, 20, Typeface::Mplus_Regular);
+
 	while (System::Update())
 	{
 		if (s_context->reloadRequested)
@@ -116,6 +118,12 @@ void Main()
 			reloadScript(*s_context);
 			callEntryPoint(*s_context);
 		}
+		else
+		{
+			(void)font(U"No script to run, see output in console.").drawAt(
+				TextStyle::Outline(0.2, Palette::Gray), Scene::Center(), Palette::Whitesmoke);
+		}
+
 		checkReloadRequest(*s_context);
 	}
 }
