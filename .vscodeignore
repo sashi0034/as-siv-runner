@@ -10,8 +10,8 @@ vsc-extension-quickstart.md
 **/*.ts
 **/.vscode-test.*
 .idea/**
-ScriptRunner/**
+ScriptRunner/**/*
 !ScriptRunner/ScriptRunner/App/
 ScriptRunner/ScriptRunner/App/ScriptRunner(debug).exe
-ScriptRunner/ScriptRunner/App/AS_DEBUG
+ScriptRunner/ScriptRunner/App/AS_DEBUG/*
 ScriptRunner/ScriptRunner/App/example/*
