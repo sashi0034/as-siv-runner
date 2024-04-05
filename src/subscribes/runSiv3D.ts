@@ -5,7 +5,7 @@ import {ChildProcessWithoutNullStreams} from "child_process";
 
 let s_process: ChildProcessWithoutNullStreams | null = null;
 
-export function runSiv3D(context: vscode.ExtensionContext, outputChannel: OutputChannel, entryPoint: string) {
+export async function runSiv3D(context: vscode.ExtensionContext, outputChannel: OutputChannel, entryPoint: string) {
     outputChannel.show();
 
     const editor = vscode.window.activeTextEditor;
@@ -19,6 +19,7 @@ export function runSiv3D(context: vscode.ExtensionContext, outputChannel: Output
         vscode.window.showErrorMessage('The active editor does not contain a file.');
         return;
     }
+    await document.save();
 
     const filePath = document.uri.fsPath;
     vscode.window.showInformationMessage(`Run '${entryPoint} in '${filePath}'`);
