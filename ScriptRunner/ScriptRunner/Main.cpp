@@ -111,9 +111,12 @@ void Main()
 
 	while (System::Update())
 	{
-		if (s_context->reloadRequested) reloadScript(*s_context);
-		if (s_context->missingEntryPoint) checkReloadRequest(*s_context);
-		callEntryPoint(*s_context);
+		if (s_context->reloadRequested)
+		{
+			reloadScript(*s_context);
+			callEntryPoint(*s_context);
+		}
+		checkReloadRequest(*s_context);
 	}
 }
 
