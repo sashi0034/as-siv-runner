@@ -20,8 +20,6 @@ void Main(){
 }
 
 //
-// - https://marketplace.visualstudio.com/items?itemName=sashi0034.angel-lsp を使用すると、スクリプトのシンタックスハイライトや補完が効きます。
-//
 // - OpenSiv3D 用の補完をするには、https://github.com/sashi0034/angel-lsp/blob/main/examples/OpenSiv3D/as.predefined をワークスペース直下に配置してください。
 //
 // - 右上の ▶️ ボタンからスクリプトを実行できます。

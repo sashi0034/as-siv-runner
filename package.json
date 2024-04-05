@@ -1,14 +1,18 @@
 {
   "name": "as-siv-runner",
-  "displayName": "as-siv-runner",
-  "description": "AngelScript Runner Powered by OpenSiv3D",
-  "version": "0.0.1",
+  "displayName": "AngelScript Runner",
+  "description": "Simple AngelScript Runner Powered by OpenSiv3D for VSCode",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.87.0"
   },
-  "categories": [
-    "Other"
+  "extensionDependencies": [
+    "sashi0034.angel-lsp"
   ],
+  "categories": [
+    "angelscript"
+  ],
+  "icon": "icons/as-siv-icon.png",
   "activationEvents": [
     "workspaceContains:**/*.as"
   ],
