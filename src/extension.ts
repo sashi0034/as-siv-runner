@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import {runSiv3D} from "./subscribes/runSiv3D";
+import {checkCopyPredefined} from "./subscribes/copyPredefined";
 
 let s_outputChannel: vscode.OutputChannel | undefined;
 
@@ -19,6 +20,10 @@ export function activate(context: vscode.ExtensionContext) {
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "as-siv-runner" is now active!');
+
+    checkCopyPredefined().catch((reason) => {
+        console.error(reason);
+    });
 
     context.subscriptions.push(vscode.commands.registerCommand('as-siv-runner.runMain', () => {
         runSiv3D(context, getOutputChannel(), 'Main');
