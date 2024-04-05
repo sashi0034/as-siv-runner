@@ -8,21 +8,23 @@ let s_process: ChildProcessWithoutNullStreams | null = null;
 export async function runSiv3D(context: vscode.ExtensionContext, outputChannel: OutputChannel, entryPoint: string) {
     outputChannel.show();
 
+    const messageItems = 'Got it';
+
     const editor = vscode.window.activeTextEditor;
     if (editor === undefined) {
-        vscode.window.showErrorMessage('No file selected for execution.');
+        vscode.window.showErrorMessage('No file selected for execution.', messageItems);
         return;
     }
 
     const document = editor.document;
     if (document.uri.scheme !== 'file') {
-        vscode.window.showErrorMessage('The active editor does not contain a file.');
+        vscode.window.showErrorMessage('The active editor does not contain a file.', messageItems);
         return;
     }
     await document.save();
 
     const filePath = document.uri.fsPath;
-    vscode.window.showInformationMessage(`Run '${entryPoint} in '${filePath}'`);
+    vscode.window.showInformationMessage(`Run '${entryPoint} in '${filePath}'`, messageItems);
 
     outputChannel.clear();
     if (s_process !== null) {
