@@ -413,6 +413,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\template.as" />
     <Content Include="App\test.as" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

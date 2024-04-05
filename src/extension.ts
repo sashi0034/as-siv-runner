@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import {runSiv3D} from "./subscribes/runSiv3D";
 import {checkCopyPredefined} from "./subscribes/copyPredefined";
+import {insertScriptTemplate} from "./subscribes/insertScriptTemplate";
 
 let s_outputChannel: vscode.OutputChannel | undefined;
 
@@ -32,6 +33,10 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push((vscode.commands.registerCommand('as-siv-runner.runTest', () => {
         runSiv3D(context, getOutputChannel(), 'Test');
     })));
+
+    context.subscriptions.push(vscode.workspace.onDidCreateFiles(e =>
+        insertScriptTemplate(context, e)
+    ));
 }
 
 // This method is called when your extension is deactivated

@@ -25,7 +25,7 @@ export function runSiv3D(context: vscode.ExtensionContext, outputChannel: Output
 
     outputChannel.clear();
     if (s_process !== null) {
-        s_process.kill(); // FIXME: キルされない
+        s_process.kill();
     }
 
     const execPath = path.join(context.extensionPath, 'ScriptRunner/ScriptRunner/App/ScriptRunner.exe');
