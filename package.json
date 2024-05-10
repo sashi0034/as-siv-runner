@@ -1,8 +1,8 @@
 {
   "name": "as-siv-runner",
-  "displayName": "AngelScript Runner",
+  "displayName": "AngelScript OpenSiv3D Runner",
   "description": "Simple AngelScript Runner Powered by OpenSiv3D for VSCode",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "engines": {
     "vscode": "^1.87.0"
   },
